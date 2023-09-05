@@ -4,6 +4,7 @@ import Image from "next/image";
 type Props = {
   shoesData: shoeType[];
   addToCart: Function;
+  viewDetail: Function;
 };
 
 export default function ListShoes(props: Props) {
@@ -23,7 +24,10 @@ export default function ListShoes(props: Props) {
             </button>
           </div>
           <div className='flex justify-center mb-3'>
-            <button className='px-3 py-1 rounded-lg bg-black text-white text-center w-[90%] cursor-pointer hover:bg-gray-600 duration-300'>
+            <button
+              onClick={() => props.viewDetail(item.id)}
+              className='px-3 py-1 rounded-lg bg-black text-white text-center w-[90%] cursor-pointer hover:bg-gray-600 duration-300'
+            >
               See detail
             </button>
           </div>

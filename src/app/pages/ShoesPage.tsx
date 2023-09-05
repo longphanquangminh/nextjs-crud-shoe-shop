@@ -5,9 +5,23 @@ import ItemCartShoe from "../components/ShoesComponents/ItemCartShoe";
 import { shoesData } from "@/app/assets/data/shoesData";
 import { useState } from "react";
 import { cartShoeType } from "../types/cartShoeType";
+import ModalShoes from "../components/modals/ModalShoes";
+import { RemoveScrollBar } from "react-remove-scroll-bar";
+import { shoeType } from "../types/shoeType";
 
 export default function ShoesPage() {
   const [shoesArr, setShoesArr] = useState<cartShoeType[]>([]);
+  const [modalShow, setModalShow] = useState<boolean>(false);
+  const [detail, setDetail] = useState<shoeType>({
+    id: 0,
+    name: "",
+    alias: "",
+    price: 0,
+    description: "",
+    shortDescription: "",
+    quantity: 0,
+    image: "",
+  });
   const addToCart = (id: number) => {
     const cloneShoesArr = shoesArr;
     const index = cloneShoesArr.findIndex(item => {
@@ -48,8 +62,18 @@ export default function ShoesPage() {
       setShoesArr([...shoesArr]);
     }
   };
+  const viewDetail = (id: number) => {
+    setModalShow(true);
+    const chosenItem = shoesData.find(item => item.id === id)!;
+    setDetail(chosenItem);
+  };
+  const closeModal = () => {
+    setModalShow(false);
+  };
   return (
     <>
+      {modalShow && <RemoveScrollBar />}
+      <ModalShoes isShown={modalShow} data={detail} closeModal={closeModal} />
       <div className='grid grid-cols-1 lg:grid-cols-2 p-3 gap-3'>
         <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
           <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
@@ -85,7 +109,7 @@ export default function ShoesPage() {
             </tbody>
           </table>
         </div>
-        <ListShoes shoesData={shoesData} addToCart={addToCart} />
+        <ListShoes shoesData={shoesData} addToCart={addToCart} viewDetail={viewDetail} />
       </div>
     </>
   );

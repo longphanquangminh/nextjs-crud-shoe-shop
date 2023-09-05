@@ -21,17 +21,26 @@ export default function ItemCartShoe(props: Props) {
       </td>
       <td className='px-6 py-4'>
         <div className='grid grid-cols-1 lg:grid-cols-3'>
-          <button className='px-3 py-1 bg-black text-white' onClick={() => props.reduceQuantity(id)}>
+          <button
+            className='text-center px-3 py-1 bg-black text-white cursor-pointer hover:bg-gray-500 duration-300'
+            onClick={() => props.reduceQuantity(id)}
+          >
             -
           </button>
           <div className='text-center flex justify-center items-center'>{cartQuantity}</div>
-          <button className='px-3 py-1 bg-black text-white' onClick={() => props.addQuantity(id)}>
+          <button
+            className='text-center px-3 py-1 bg-black text-white cursor-pointer hover:bg-gray-500 duration-300'
+            onClick={() => props.addQuantity(id)}
+          >
             +
           </button>
         </div>
       </td>
       <td className='px-6 py-4'>
-        <a onClick={() => props.removeFromCart(id)} className='font-medium cursor-pointer text-blue-600 dark:text-blue-500 hover:underline'>
+        <a
+          onClick={() => props.removeFromCart(id)}
+          className='text-center font-medium cursor-pointer text-blue-600 dark:text-blue-500 hover:underline duration-300'
+        >
           Delete
         </a>
       </td>
